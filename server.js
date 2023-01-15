@@ -42,15 +42,15 @@ app.use(methodOverride("_method"))
 // })
 
 //Get methods to render respectivie page's
-app.get("/" , (req ,res) => {
+app.get("/" , isUserAuthenticated, (req ,res) => {
     res.render("index.ejs" , {name : "Bharat"});
 })
 
-app.get("/login" , (req, res) => {
+app.get("/login" , isUserNotAuthenticated , (req, res) => {
     res.render("login.ejs");
 })
 
-app.get("/register" , (req, res) => {
+app.get("/register" , isUserNotAuthenticated, (req, res) => {
     res.render("register.ejs");
 })
 
@@ -81,6 +81,31 @@ app.post("/register" , async (req, res) => {
         return res.redirect("/register");
        } 
 })
+
+app.delete("/logout" , (req, res) => {
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/login');
+    });
+})
+
+function isUserAuthenticated(req, res, next){
+
+    if(req.isAuthenticated()){
+        return next();
+    }
+
+    return res.redirect("/login");
+}
+
+function isUserNotAuthenticated(req, res, next){
+
+    if(!req.isAuthenticated()){
+        return next();
+    }
+    
+    return res.redirect("/");
+}
 
 app.listen(3000, function(){
     console.log("Server is live !!!!!");
