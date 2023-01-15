@@ -45,6 +45,8 @@ function init(passport, getUserByEmail, getUserByid){
 
     /*
         Now coming to deseralizing, we are deseralizing what we chose to serialize which is the ID property, hence we pass the id as the first parameter in the deserialaizeFunction below, and the second parameter done, and within it, the done function is supposed to get null as first arg, and the actual userObj as the second arg
+
+        After serializeUser and deserializeuser, the req Object will have a user field attached to it which will be the user object sent in Line 18
     */
 
     passport.deserializeUser((id , done) => {
