@@ -2,9 +2,9 @@
 Simple passport-local implementation to show login,register and authentication features
 
 Included routes ---> <br>
-/ <br>
-/login <br> 
-/register <br>
+1) / <br>
+2) /login <br> 
+3) /register <br>
 
 These route's are rendered using EJS. 
 <br><br>
